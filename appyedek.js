@@ -1,3 +1,98 @@
+ for (let i = 0; i < 2; i++) {
+
+    // İlk oyuncudan giriş al
+    let firstPlayerInput = prompt("First player, enter your location (format: x,y):");
+    firstPlayer.playerChoice.push(firstPlayerInput);
+    firstPlayer.moveCount++;
+
+    // Kullanıcı girdisini sayıya çevir
+    let [x, y] = firstPlayer.playerChoice[i].split(',').map(Number);
+
+    for (let j = 0; j < matrix.length; j++) {
+        if (matrix[j][0] === x && matrix[j][1] === y) {
+            matrix.splice(j, 1); // Eşleşen elemanı bul ve çıkar
+             break;
+        }
+}
+    
+
+
+}
+
+
+//çalışıyor
+for (let i = 0; i < 2; i++) {
+    // İlk oyuncudan giriş al ve sayı dizisine çevir
+    let firstPlayerInput = prompt("First player, enter your location (format: x,y):");
+    let choice = firstPlayerInput.split(',').map(Number);
+    firstPlayer.playerChoice.push(choice); // Sayı dizisini playerChoice'a ekle
+    firstPlayer.moveCount++;
+
+    // 'choice' değişkenini kullanarak matrix'ten çıkar
+    for (let j = 0; j < matrix.length; j++) {
+        if (matrix[j][0] === choice[0] && matrix[j][1] === choice[1]) {
+            matrix.splice(j, 1); // Eşleşen elemanı bul ve çıkar
+            break;
+        }
+    }
+}
+
+
+//app.js fonksiyonlara bölünmeden önceki ilk hali
+
+const firstPlayer = {
+    playerChoice: [],
+    moveCount: 0
+
+};
+
+const secondPlayer = {
+    playerChoice: []
+};
+
+
+  let matrix = [
+    [1, 1],
+    [1, 2],
+    [1, 3],
+    [2, 1],
+    [2, 2],
+    [2, 3],
+    [3, 1],
+    [3, 2],
+    [3, 3]
+  ];
+
+
+
+  for (let i = 0; i < 4; i++) {
+    // İlk oyuncudan giriş al
+    let firstPlayerInput = prompt("First player, enter your location (format: x,y):");
+    let choice = firstPlayerInput.split(',').map(Number); // String'i sayı dizisine dönüştür
+    firstPlayer.playerChoice.push(choice); // Sayı dizisini playerChoice'a ekle
+    firstPlayer.moveCount++;
+
+    // 'firstPlayer.playerChoice[i]' elemanını kullanarak matrix'ten çıkar
+    let [x, y] = firstPlayer.playerChoice[i]; // İlgili elemanı al
+    for (let j = 0; j < matrix.length; j++) {
+        if (matrix[j][0] === x && matrix[j][1] === y) {
+            matrix.splice(j, 1); // Eşleşen elemanı bul ve çıkar
+            break; // Bulduktan sonra döngüden çık
+        }
+    }
+}
+
+
+
+
+
+console.log("First Player Choices: ", firstPlayer.playerChoice);
+console.log("First Player Move Count: ", firstPlayer.moveCount);
+console.log("Updated Matrix: ", matrix);
+
+
+
+//görselsiz hali yedek
 
 function getUserInput(player, matrix) {
     while (true) {

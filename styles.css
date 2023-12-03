@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    justify-content: center; /* Yatay olarak ortala */
+    align-items: center; /* Dikey olarak ortala */
+    height: 100vh; /* Tam sayfa yüksekliği */
+}
+
+
+
+.thecontainer{
+    width: 500px;
+    height: 500px;
+    border: 5px solid pink;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+    
+}
+
+.thecontainer div {
+    border: 2px solid black; /* Her grid hücresine sınır ekle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* İç boşluk */
+}
