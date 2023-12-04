@@ -1,8 +1,37 @@
+#game-name{
+    color: lightpink;
+    font-size: 48px;
+     font-weight: bold;
+    font-family: 'Arial', sans-serif;
+  
+   
+    
+    background-color: #573F4F;
+    background-image: linear-gradient(45deg, #D679B5, #AAD67A);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+#x{
+    color: #D679B5;
+}
+
+
+#o{
+    color: #AAD67A; 
+}
+
+
 .wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center; /* Yatay olarak ortala */
     align-items: center; /* Dikey olarak ortala */
     height: 100vh; /* Tam sayfa yüksekliği */
+    font-family: 'Arial', sans-serif;
 }
 
 
@@ -10,7 +39,8 @@
 .thecontainer{
     width: 500px;
     height: 500px;
-    border: 5px solid pink;
+    /* border: 5px solid pink; */
+    background-color: lightgoldenrodyellow;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -19,9 +49,78 @@
 }
 
 .thecontainer div {
-    border: 2px solid black; /* Her grid hücresine sınır ekle */
+    border: 2px solid #573F4F; /* Her grid hücresine sınır ekle */
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px; /* İç boşluk */
 }
+
+
+
+.player-x {
+    color: #D679B5;
+    font-size: 48px;
+    /* font-weight: bold; */
+    font-family: 'Arial', sans-serif;
+}
+
+.player-o {
+    color: #AAD67A; 
+    font-size: 48px;
+    /* font-weight: bold; */
+    font-family: 'Arial', sans-serif;
+}
+
+
+/* Mevcut CSS kodlarınız */
+
+
+
+
+.hidden {
+    display: none;
+}
+
+#winner-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Yarı saydam arka plan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: rgba(255, 255, 255, 0.9); /* Hafif saydam beyaz arka plan */
+    padding: 20px;
+    border-radius: 10px;
+    border: 5px solid #573F4F;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    width: 300px; /* Genişlik */
+    height: 150px; /* Yükseklik */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content span {
+    font-size: 30px; /* Metin boyutu */
+    margin-bottom: 15px; /* Metin ile buton arasındaki boşluk */
+    padding: 10px;
+    font-weight: bold;
+    color: #573F4F;
+    
+}
+
+.popup-content button {
+    font-size: 16px;
+    padding: 10px 20px; /* Buton boyutu */
+    background-color:#AAD67A;
+    border-radius: 10px;
+}
+

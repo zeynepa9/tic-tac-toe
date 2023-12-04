@@ -9,21 +9,31 @@
 <body>
     
     <div class="wrapper">
+        <p id="game-name">tic-tac-toe</p>
+        <p id="x">First Player: X</p>
+        <p id="o">Second Player: O</p>
         <div class="thecontainer">
-            <div id="firstone"></div>
-            <div id="secondone"></div>
-            <div id="thirdone"></div>
-            <div id="forthone"></div>
-            <div id="fifthone"></div>
-            <div id="sixthone"></div>
-            <div id="seventone"></div>
-            <div id="eightone"></div>
-            <div id="nignhtone"></div>
+            <div id="firstone" data-x="1" data-y="1"></div>
+            <div id="secondone" data-x="1" data-y="2"></div>
+            <div id="thirdone" data-x="1" data-y="3"></div>
+            <div id="forthone" data-x="2" data-y="1"></div>
+            <div id="fifthone" data-x="2" data-y="2"></div>
+            <div id="sixthone" data-x="2" data-y="3"></div>
+            <div id="seventone" data-x="3" data-y="1"></div>
+            <div id="eightone" data-x="3" data-y="2"></div>
+            <div id="nignhtone" data-x="3" data-y="3"></div>
         </div>
     </div>      
 
+    <div id="container-pop-up" class="hidden">
+    <div id="winner-popup">
+        <div class="popup-content">
+            <span id="winner-message"></span>
+            <button onclick="restartGame()">Restart</button>
+        </div>
+    </div>
+</div>
 
-
-    <!-- <script src="app.js"></script> -->
+    <script src="app.js"></script> 
 </body>
 </html>

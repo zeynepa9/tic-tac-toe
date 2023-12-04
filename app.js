@@ -1,22 +1,27 @@
+const firstPlayer = {
+    playerChoice: [],
+    moveCount: 0
+};
 
-function getUserInput(player, matrix) {
-    while (true) {
-        let input = prompt(`${player}, enter your location (format: x,y):`);
-        let choice = input.split(',').map(Number);
-        
-        // Matrix'te bu seçimin olup olmadığını kontrol et
-        if (matrix.some(([x, y]) => x === choice[0] && y === choice[1])) {
-            return choice;
-        } else {
-            console.log("Invalid move or already taken. Please try again.");
-        }
-    }
-}
+const secondPlayer = {
+    playerChoice: [],
+    moveCount: 0
+};
 
+let matrix = [
+    [1, 1],
+    [1, 2],
+    [1, 3],
+    [2, 1],
+    [2, 2],
+    [2, 3],
+    [3, 1],
+    [3, 2],
+    [3, 3]
+];
 
 function addToPlayerChoices(playerObject, choice) {
     playerObject.playerChoice.push(choice);
-    // playerObject.moveCount++;
 }
 
 function removeFromMatrix(matrix, choice) {
@@ -27,8 +32,6 @@ function removeFromMatrix(matrix, choice) {
         }
     }
 }
-
-
 
 function determineWinner(firstPlayerChoices, secondPlayerChoices) {
     // Satır ve sütunlardaki eşleşmeleri kontrol et
@@ -99,8 +102,6 @@ function determineWinner(firstPlayerChoices, secondPlayerChoices) {
             console.log('Second player is the winner');
             return 'secondPlayer';
         }
-    
-
 
     }
 
@@ -109,81 +110,57 @@ function determineWinner(firstPlayerChoices, secondPlayerChoices) {
 }
 
 
+function showWinnerPopup(winnerText) {
+    document.getElementById('winner-message').textContent = winnerText;
+    document.getElementById('container-pop-up').classList.remove('hidden');
+}
+
+function restartGame() {
+    window.location.reload(); // Sayfayı yeniden yükler
+}
 
 
+document.querySelectorAll('.thecontainer div').forEach(div => {
+    div.addEventListener('click', function() {
+        const x = parseInt(this.getAttribute('data-x'), 10);
+        const y = parseInt(this.getAttribute('data-y'), 10);
+        const choice = [x, y];
+
+        const currentPlayer = (firstPlayer.moveCount <= secondPlayer.moveCount) ? firstPlayer : secondPlayer;
+
+        if (matrix.some(([mx, my]) => mx === choice[0] && my === choice[1])) {
+            addToPlayerChoices(currentPlayer, choice);
+            removeFromMatrix(matrix, choice);
+            currentPlayer.moveCount++;
+
+            if (currentPlayer === firstPlayer) {
+            this.textContent = 'X';
+            this.classList.add('player-x'); // "X" için CSS sınıfı ekle
+        } else {
+            this.textContent = 'O';
+            this.classList.add('player-o'); // "O" için CSS sınıfı ekle
+        }
 
 
-const firstPlayer = {
-    playerChoice: [],
-    moveCount: 0
+            // Kazananı kontrol etme
+            if (currentPlayer.moveCount >= 3) {
+                const winner = determineWinner(firstPlayer.playerChoice, secondPlayer.playerChoice);
+                if (winner) {
+                    const winnerText = winner === 'firstPlayer' ? "First Player wins!" : "Second Player wins!";
+                    setTimeout(() => {
+                        showWinnerPopup(winnerText);
+                    }, 500);
+                    return; // Oyunu sonlandır
+                }
+            }
 
-};
-
-const secondPlayer = {
-    playerChoice: [],
-    moveCount: 0
-};
-
-
-  let matrix = [
-    [1, 1],
-    [1, 2],
-    [1, 3],
-    [2, 1],
-    [2, 2],
-    [2, 3],
-    [3, 1],
-    [3, 2],
-    [3, 3]
-  ];
-
-
-
-
-
-  for (let i = 0; i < 5; i++) {
-      // First player'ın hamlesi
-      if (matrix.length > 0) {
-          let firstPlayerChoice = getUserInput("First player", matrix);
-          addToPlayerChoices(firstPlayer, firstPlayerChoice);
-          removeFromMatrix(matrix, firstPlayerChoice);
-          firstPlayer.moveCount++;
-      }
-  
-      // Kazananı 3 veya daha fazla hamleden sonra kontrol et
-      if (firstPlayer.moveCount >= 3 && determineWinner(firstPlayer.playerChoice, secondPlayer.playerChoice)) {
-          console.log("Game over, we have a winner!");
-          break;
-      }
-  
-      // Second player'ın hamlesi
-      if (matrix.length > 0) {
-          let secondPlayerChoice = getUserInput("Second player", matrix);
-          addToPlayerChoices(secondPlayer, secondPlayerChoice);
-          removeFromMatrix(matrix, secondPlayerChoice);
-          secondPlayer.moveCount++;
-  
-    // Kazananı 3 veya daha fazla hamleden sonra kontrol et
-          if (secondPlayer.moveCount >= 3 && determineWinner(firstPlayer.playerChoice, secondPlayer.playerChoice)) {
-              console.log("Game over, we have a winner!");
-              break;
-          }
-      } else {
-          console.log("Berabere!");
-          break;
-      }
-  }
-  
-
-
-
-
-
-
-console.log("First Player Choices: ", firstPlayer.playerChoice);
-console.log("Second Player Choices: ", secondPlayer.playerChoice);
-
-console.log("First Player Move Count: ", firstPlayer.moveCount);
-console.log("Second Player Move Count: ", secondPlayer.moveCount);
-
-console.log("Updated Matrix: ", matrix);
+            // Tüm hamleler tamamlandıysa ve kazanan yoksa, berabere durumunu kontrol et
+            if (matrix.length === 0 && !determineWinner(firstPlayer.playerChoice, secondPlayer.playerChoice)) {
+                console.log("It's a draw!");
+                return; // Oyunu sonlandır
+            }
+        } else {
+            console.log("Invalid move or already taken.");
+        }
+    });
+});
