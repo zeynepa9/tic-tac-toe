@@ -37,9 +37,6 @@ This project emphasized the importance of organizing and structuring code effect
 1. Clone the repository to your local machine.
 2. Open the `index.html` file in a web browser to play the game.
 
-## Contributions
-
-Contributions, issues, and feature requests are welcome. Feel free to check [issues page](https://github.com/zeynepa9/tic-tac-toe/issues) if you want to contribute.
 
 ## Acknowledgements
 
