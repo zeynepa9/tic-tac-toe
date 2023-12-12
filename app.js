@@ -149,7 +149,7 @@ document.querySelectorAll('.thecontainer div').forEach(div => {
                     const winnerText = winner === 'firstPlayer' ? "First Player wins!" : "Second Player wins!";
                     setTimeout(() => {
                         showWinnerPopup(winnerText);
-                    }, 500);
+                    }, 300);
                     return; // Oyunu sonlandır
                 }
             }
